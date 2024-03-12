@@ -92,17 +92,17 @@ var items = [
 
 function updateCart() {
   let cart = 0;
-  for (index = 0; index < items.length; index++) {
-    cart = cart + items[index].quantity;
+  for (let index = 0; index < items.length; index++) {
+    cart += items[index].quantity;
   }
   cartValue.innerHTML = cart;
 }
 
 for (let i = 0; i < addButtons.length; i++) {
-  addButtons[i].onclick = (e) => {
+  addButtons[i].addEventListener("click", (e) => {
     items[i].quantity++;
     updateCart();
-  };
+  });
 }
 
 var finalDollars = 0;
@@ -120,10 +120,10 @@ function updatePrice() {
   finalCents = totalPriceInCents % 100;
 }
 
-
+// cartButton.addEventListener("click",finalOutput)
 cartButton.onclick = () => {
   updatePrice();
-
+  let text=""
 
   for (let index = 0; index < items.length; index++) {
     if (items[index].quantity != 0) {
@@ -133,10 +133,16 @@ cartButton.onclick = () => {
           " - Quantity: " +
           items[index].quantity
       );
+      text+="Item name: " +
+            items[index].name +
+            " - Quantity: " +
+            items[index].quantity + "\n";
     }
   }
 
   console.log(
     "The total amount is " + finalDollars + "$ and " + finalCents + " cents"
   );
+  text+= "The total amount is " + finalDollars + "$ and " + finalCents + " cents"
+  window.open("https://wa.me/9366496765?text="+text)
 };
